@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "web_checker"
+require "mail"
+
+checker = WebChecker::Lookout.new("http://www.glasgowloveschristmas.com/whats-on/Pages/Baby's-First-Christmas.aspx", :target => "#data-area > div > div > div")
+
+if checker.changed?
+  subject = "URGENT - Baby's first chirstmas page has changed"
+else
+  subject = "Baby's first chirstmas - no change"
+end
+
+mail_delivery = Mail.deliver do
+  from     'noreply@activeinformationdesign.com'
+  to       'stewart@activeinformationdesign.com'
+  subject  subject
+  body     "http://www.glasgowloveschristmas.com/whats-on/Pages/Baby's-First-Christmas.aspx"
+end
