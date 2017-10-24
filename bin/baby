@@ -6,7 +6,6 @@ require "mail"
 
 Mail.defaults do
   delivery_method :smtp, {
-      address: "mail.domain.com",
       openssl_verify_mode: "none"
   }
 end
