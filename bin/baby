@@ -4,6 +4,13 @@ require "bundler/setup"
 require "web_checker"
 require "mail"
 
+Mail.defaults do
+  delivery_method :smtp, {
+      address: "mail.domain.com",
+      openssl_verify_mode: "none"
+  }
+end
+
 checker = WebChecker::Lookout.new("http://www.glasgowloveschristmas.com/whats-on/Pages/Baby's-First-Christmas.aspx", :target => "#data-area > div > div > div")
 
 if checker.changed?
